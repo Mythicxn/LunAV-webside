@@ -165,7 +165,7 @@
       <a href="#features">Features</a>
       <a href="#how">Setup</a>
       <a href="#contact">Contact</a>
-      <a class="gh is-disabled" id="ghTopLink" href="#" aria-disabled="true" onclick="return false;" title="Repo hiện chưa công khai">
+      <a class="gh is-disabled" id="ghTopLink" href="#" aria-disabled="true" onclick="return false;" title="Repo is not public yet">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
       </a>
@@ -285,7 +285,7 @@
   <div class="wrap foot-row">
     <div>© <span id="year"></span> Mythicxn. LunAV is built and maintained by Mythicxn.</div>
     <div class="foot-links">
-      <a id="ghFootLink" href="#" class="is-disabled" aria-disabled="true" onclick="return false;" title="Repo hiện chưa công khai">GitHub</a>
+      <a id="ghFootLink" href="#" class="is-disabled" aria-disabled="true" onclick="return false;" title="Repo is not public yet">GitHub</a>
       <a href="#features">Features</a>
       <a href="#how">Setup</a>
       <a href="#contact">Contact</a>
@@ -336,12 +336,12 @@
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (FORMSPREE_ID === 'YOUR_FORM_ID') {
-      cfStatus.textContent = 'Contact form chưa được kết nối — admin cần điền FORMSPREE_ID trong index.html.';
+      cfStatus.textContent = 'Contact form is not connected yet — admin needs to set FORMSPREE_ID in index.html.';
       cfStatus.className = 'form-status err';
       return;
     }
     cfSubmit.disabled = true;
-    cfStatus.textContent = 'Đang gửi…';
+    cfStatus.textContent = 'Sending…';
     cfStatus.className = 'form-status';
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
@@ -350,11 +350,11 @@
         body: new FormData(contactForm),
       });
       if (!res.ok) throw new Error('Send failed');
-      cfStatus.textContent = 'Đã gửi! Admin sẽ trả lời qua email bạn để lại.';
+      cfStatus.textContent = 'Sent! Mythicxn will reply to the email you left.';
       cfStatus.className = 'form-status ok';
       contactForm.reset();
     } catch (err) {
-      cfStatus.textContent = 'Gửi thất bại, thử lại sau hoặc liên hệ qua GitHub.';
+      cfStatus.textContent = 'Failed to send — please try again in a moment.';
       cfStatus.className = 'form-status err';
     } finally {
       cfSubmit.disabled = false;
