@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LunAV — Your AI Companion Living On Your Screen</title>
+<meta name="description" content="LunAV is an AI VTuber who lives in the corner of your screen, talks in a natural voice, remembers your conversations, and reacts in real time. Download LunAV free, running entirely on your own machine.">
+<link rel="icon" href="icon.ico">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root{
+    --bg:#090a12; --panel:rgba(255,255,255,.03); --border:rgba(255,255,255,.07);
+    --ink:#f6f5fb; --ink-2:#aaa8b8; --ink-3:#777687;
+    --green:#39e68c; --green-2:#18b86a; --purple:#c26bff; --blue:#6153ff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:24px;}
+  body{
+    margin:0; font-family:Inter,system-ui,sans-serif; color:var(--ink); background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- header ---------- */
+  header.top{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(10px);
+    background:rgba(9,10,18,.72); border-bottom:1px solid var(--border);
+  }
+  .topbar{height:64px; display:flex; align-items:center; justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:15px; letter-spacing:.2px;}
+  .brand img{width:26px; height:26px; border-radius:7px;}
+  .brand span b{color:var(--green);}
+  .top-links{display:flex; align-items:center; gap:22px; font-size:13px; color:var(--ink-2);}
+  .top-links a{text-decoration:none;}
+  .top-links a:hover{color:var(--ink);}
+  .top-links .gh{display:flex; align-items:center; gap:7px; padding:8px 14px; border:1px solid var(--border); border-radius:10px;}
+  .top-links .gh:hover{border-color:rgba(255,255,255,.2);}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; overflow:hidden; padding:96px 0 76px;}
+  .glow{position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none;}
+  .glow-a{width:420px; height:420px; right:-120px; top:-160px; background:rgba(194,107,255,.16);}
+  .glow-b{width:460px; height:460px; left:-180px; bottom:-220px; background:rgba(97,83,255,.13);}
+  .hero-grid{position:relative; z-index:2; display:grid; grid-template-columns:1.1fr .8fr; gap:56px; align-items:center;}
+  .eyebrow{display:inline-flex; align-items:center; gap:9px; font-size:11px; font-weight:800; letter-spacing:2.4px; color:var(--ink-2); margin-bottom:20px;}
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 14px rgba(57,230,140,.8);}
+  h1{font-size:clamp(44px,6vw,76px); line-height:.98; margin:0 0 22px; letter-spacing:-3px; font-weight:900;}
+  h1 b{color:var(--green); font-weight:900; text-shadow:0 0 30px rgba(57,230,140,.22);}
+  .lede{font-size:18px; line-height:1.6; color:var(--ink-2); max-width:480px; margin:0 0 34px;}
+
+  .cta-row{display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:14px;}
+  .btn-dl{
+    display:flex; align-items:center; gap:14px; text-decoration:none; color:#06130c;
+    background:linear-gradient(100deg,var(--green-2),var(--green)); border-radius:15px; padding:15px 22px;
+    font-weight:700; box-shadow:0 16px 40px rgba(57,230,140,.22); transition:transform .15s, box-shadow .15s;
+  }
+  .btn-dl:hover{transform:translateY(-2px); box-shadow:0 20px 48px rgba(57,230,140,.32);}
+  .btn-dl svg{flex:none;}
+  .btn-dl .lines b{display:block; font-size:15px;}
+  .btn-dl .lines small{display:block; margin-top:2px; font-size:11px; color:rgba(6,19,12,.7); font-weight:600;}
+  .btn-gh{
+    display:flex; align-items:center; gap:9px; text-decoration:none; color:var(--ink);
+    border:1px solid var(--border); border-radius:15px; padding:15px 20px; font-weight:600; font-size:14px;
+  }
+  .btn-gh:hover{border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.03);}
+  .fine{font-size:12px; color:var(--ink-3);}
+
+  .card{
+    position:relative; z-index:2; border-radius:24px; border:1px solid var(--border);
+    background:rgba(6,7,13,.5); padding:36px 28px 30px; text-align:center;
+  }
+  .orb{position:absolute; inset:auto; top:50%; left:50%; transform:translate(-50%,-56%);
+    width:230px; height:230px; border-radius:50%;
+    background:radial-gradient(circle,rgba(199,135,255,.22),rgba(199,135,255,0) 68%); z-index:-1;}
+  .ring{
+    width:148px; height:148px; margin:0 auto; border-radius:50%; padding:4px;
+    background:linear-gradient(150deg,var(--green),var(--green-2)); box-shadow:0 0 50px rgba(57,230,140,.25);
+  }
+  .ring img{width:100%; height:100%; object-fit:cover; border-radius:50%; background:#11121c; display:block;}
+  .card h3{margin:18px 0 4px; font-size:15px; letter-spacing:2.5px; font-weight:800;}
+  .card p.role{margin:0; font-size:11px; color:var(--ink-3);}
+  .chips{display:flex; justify-content:center; gap:8px; margin-top:16px;}
+  .chips span{padding:6px 11px; border-radius:999px; font-size:10px; color:var(--ink-2); background:rgba(255,255,255,.05); border:1px solid var(--border);}
+
+  /* ---------- features ---------- */
+  .features{padding:14px 0 90px;}
+  .features h2{font-size:13px; letter-spacing:2px; color:var(--ink-3); font-weight:800; margin:0 0 26px;}
+  .feat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .feat{padding:22px 20px; border-radius:18px; border:1px solid var(--border); background:var(--panel);}
+  .feat .ic{width:36px; height:36px; display:grid; place-items:center; border-radius:11px; color:var(--green); background:rgba(57,230,140,.1); margin-bottom:16px; font-size:16px;}
+  .feat h4{margin:0 0 8px; font-size:14px;}
+  .feat p{margin:0; font-size:12.5px; line-height:1.55; color:var(--ink-3);}
+
+  /* ---------- how it works ---------- */
+  .how{padding:0 0 96px;}
+  .how h2{font-size:13px; letter-spacing:2px; color:var(--ink-3); font-weight:800; margin:0 0 26px;}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .step{padding:24px 22px; border-radius:18px; border:1px solid var(--border); background:var(--panel); position:relative;}
+  .step .n{font-size:12px; font-weight:800; color:var(--green); letter-spacing:1px;}
+  .step h4{margin:12px 0 8px; font-size:15px;}
+  .step p{margin:0; font-size:12.5px; line-height:1.55; color:var(--ink-3);}
+
+  footer{border-top:1px solid var(--border); padding:26px 0 34px;}
+  .foot-row{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12px; color:var(--ink-3);}
+  .foot-row a{text-decoration:none; color:var(--ink-3);}
+  .foot-row a:hover{color:var(--ink-2);}
+  .foot-links{display:flex; gap:18px;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .card{max-width:340px; margin:0 auto;}
+    .feat-grid{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap topbar">
+    <div class="brand"><img src="icon.ico" alt="LunAV" onerror="this.style.display='none'"><span>Lun<b>AV</b></span></div>
+    <nav class="top-links">
+      <a href="#features">Features</a>
+      <a href="#how">Setup</a>
+      <a class="gh" id="ghTopLink" href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> AI VTUBER COMPANION</div>
+      <h1>A companion<br>living on your <b>screen</b></h1>
+      <p class="lede">LunAV — your little companion, running right on your machine.</p>
+
+      <div class="cta-row">
+        <a class="btn-dl" id="downloadBtn" href="#" >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16" stroke="#06130c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lines"><b>Download LunAV</b><small id="versionLabel">Checking for the latest version…</small></span>
+        </a>
+        <a class="btn-gh" id="ghReleasesLink" href="#" target="_blank" rel="noopener">See all releases ↗</a>
+      </div>
+      <div class="fine">Windows · Works offline once installed · Auto-updates via GitHub</div>
+    </div>
+
+    <div class="card">
+      <div class="orb"></div>
+      <div class="ring"><img src="icon.ico" alt="Akuro" onerror="this.style.display='none'"></div>
+      <h3>AKURO</h3>
+      <p class="role">Default AI model</p>
+      <div class="chips"><span>AI Ready</span><span>Local</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <h2>FEATURES</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ic">💬</div>
+        <h4>AI conversation</h4>
+        <p>Powered by Gemini, understands context and remembers your conversations over time.</p>
+      </div>
+      <div class="feat">
+        <div class="ic">🔊</div>
+        <h4>Natural voice</h4>
+        <p>Speaks every reply out loud, with a tone that shifts to match her mood.</p>
+      </div>
+      <div class="feat">
+        <div class="ic">🖐️</div>
+        <h4>Hands-on interaction</h4>
+        <p>Pat her head, stroke her hair, touch the model — LunAV reacts instantly with expressions and words.</p>
+      </div>
+      <div class="feat">
+        <div class="ic">🎙️</div>
+        <h4>Talk over Discord</h4>
+        <p>Invite LunAV into your Discord voice channel to talk with her live.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <h2>SET UP IN 3 STEPS</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">STEP 1</div>
+        <h4>Download the launcher</h4>
+        <p>Click the Download LunAV button above to get the latest installer.</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 2</div>
+        <h4>Run the launcher</h4>
+        <p>It downloads the rest of the app and checks for updates every time it opens.</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 3</div>
+        <h4>Start chatting</h4>
+        <p>Hit Start LunAV — she appears in the corner of your screen, ready to talk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© <span id="year"></span> Mythicxn. LunAV is built and maintained by Mythicxn.</div>
+    <div class="foot-links">
+      <a id="ghFootLink" href="#" target="_blank" rel="noopener">GitHub</a>
+      <a href="#features">Features</a>
+      <a href="#how">Setup</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Set this to your actual "owner/repo-name" once the launcher repo exists.
+  const REPO = 'Mythicxn/LunAV-Release';
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const ghUrl = `https://github.com/${REPO}`;
+  document.getElementById('ghTopLink').href = ghUrl;
+  document.getElementById('ghFootLink').href = ghUrl;
+  document.getElementById('ghReleasesLink').href = ghUrl + '/releases';
+
+  const downloadBtn = document.getElementById('downloadBtn');
+  const versionLabel = document.getElementById('versionLabel');
+
+  async function loadLatestRelease() {
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`);
+      if (!res.ok) throw new Error('Could not fetch release info');
+      const data = await res.json();
+      const assets = Array.isArray(data.assets) ? data.assets : [];
+      const asset = assets.find(a => /\.(exe|zip)$/i.test(a.name)) || assets[0];
+      if (!asset) throw new Error('No file attached to this release');
+      downloadBtn.href = asset.browser_download_url;
+      versionLabel.textContent = `${data.tag_name || 'Latest'} · Windows`;
+    } catch (e) {
+      // Repo has no release yet -> send straight to the Releases page instead of a dead link.
+      downloadBtn.href = ghUrl + '/releases';
+      versionLabel.textContent = 'See releases on GitHub';
+    }
+  }
+  loadLatestRelease();
+</script>
+</body>
+</html>
