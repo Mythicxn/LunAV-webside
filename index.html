@@ -38,6 +38,9 @@
   .top-links a:hover{color:var(--ink);}
   .top-links .gh{display:flex; align-items:center; gap:7px; padding:8px 14px; border:1px solid var(--border); border-radius:10px;}
   .top-links .gh:hover{border-color:rgba(255,255,255,.2);}
+  .top-links .gh.is-disabled, .foot-links a.is-disabled{
+    opacity:.4; cursor:not-allowed; pointer-events:none;
+  }
 
   /* ---------- hero ---------- */
   .hero{position:relative; overflow:hidden; padding:96px 0 76px;}
@@ -103,6 +106,41 @@
   .step h4{margin:12px 0 8px; font-size:15px;}
   .step p{margin:0; font-size:12.5px; line-height:1.55; color:var(--ink-3);}
 
+  /* ---------- contact ---------- */
+  .contact{padding:0 0 100px;}
+  .contact h2{font-size:13px; letter-spacing:2px; color:var(--ink-3); font-weight:800; margin:0 0 26px;}
+  .contact-box{
+    display:grid; grid-template-columns:.85fr 1.15fr; gap:0; border-radius:20px; border:1px solid var(--border);
+    background:var(--panel); overflow:hidden;
+  }
+  .contact-info{padding:32px 30px; border-right:1px solid var(--border);}
+  .contact-info h3{margin:0 0 10px; font-size:20px;}
+  .contact-info p{margin:0 0 22px; font-size:13.5px; line-height:1.6; color:var(--ink-3);}
+  .contact-info a.mail{
+    display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600;
+    color:var(--green); text-decoration:none;
+  }
+  .contact-info a.mail:hover{text-decoration:underline;}
+  .contact-form{padding:32px 30px; display:grid; gap:14px;}
+  .contact-form label{font-size:12px; color:var(--ink-2); font-weight:600; display:block; margin-bottom:6px;}
+  .contact-form input, .contact-form textarea{
+    width:100%; padding:12px 14px; border-radius:11px; border:1px solid var(--border);
+    background:rgba(255,255,255,.02); color:var(--ink); font-family:inherit; font-size:13.5px; resize:vertical;
+  }
+  .contact-form input:focus, .contact-form textarea:focus{outline:none; border-color:var(--green);}
+  .contact-form textarea{min-height:110px;}
+  .contact-form button{
+    justify-self:start; border:none; cursor:pointer; color:#06130c;
+    background:linear-gradient(100deg,var(--green-2),var(--green)); border-radius:11px; padding:12px 22px;
+    font-weight:700; font-size:13.5px; transition:transform .15s;
+  }
+  .contact-form button:hover{transform:translateY(-1px);}
+  .contact-form button:disabled{opacity:.6; cursor:not-allowed; transform:none;}
+  .form-status{font-size:12.5px; min-height:16px;}
+  .form-status.ok{color:var(--green);}
+  .form-status.err{color:#ff8a8a;}
+  @media (max-width:860px){ .contact-box{grid-template-columns:1fr;} .contact-info{border-right:none; border-bottom:1px solid var(--border);} }
+
   footer{border-top:1px solid var(--border); padding:26px 0 34px;}
   .foot-row{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12px; color:var(--ink-3);}
   .foot-row a{text-decoration:none; color:var(--ink-3);}
@@ -126,7 +164,8 @@
     <nav class="top-links">
       <a href="#features">Features</a>
       <a href="#how">Setup</a>
-      <a class="gh" id="ghTopLink" href="#" target="_blank" rel="noopener">
+      <a href="#contact">Contact</a>
+      <a class="gh is-disabled" id="ghTopLink" href="#" aria-disabled="true" onclick="return false;" title="Repo hiện chưa công khai">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
       </a>
@@ -214,13 +253,43 @@
   </div>
 </section>
 
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>CONTACT</h2>
+    <div class="contact-box">
+      <div class="contact-info">
+        <h3>Talk to the admin</h3>
+        <p>Bug reports, feature ideas, or anything else — send a message and Mythicxn will get back to you by email.</p>
+        <a class="mail" href="https://github.com/Mythicxn" target="_blank" rel="noopener">↗ Or find Mythicxn on GitHub</a>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <div>
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="name" type="text" required maxlength="80" placeholder="Your name">
+        </div>
+        <div>
+          <label for="cf-email">Your email</label>
+          <input id="cf-email" name="email" type="email" required maxlength="120" placeholder="you@example.com">
+        </div>
+        <div>
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required maxlength="2000" placeholder="What's up?"></textarea>
+        </div>
+        <button type="submit" id="cfSubmit">Send message</button>
+        <div class="form-status" id="cfStatus"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap foot-row">
     <div>© <span id="year"></span> Mythicxn. LunAV is built and maintained by Mythicxn.</div>
     <div class="foot-links">
-      <a id="ghFootLink" href="#" target="_blank" rel="noopener">GitHub</a>
+      <a id="ghFootLink" href="#" class="is-disabled" aria-disabled="true" onclick="return false;" title="Repo hiện chưa công khai">GitHub</a>
       <a href="#features">Features</a>
       <a href="#how">Setup</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </footer>
@@ -231,8 +300,7 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
   const ghUrl = `https://github.com/${REPO}`;
-  document.getElementById('ghTopLink').href = ghUrl;
-  document.getElementById('ghFootLink').href = ghUrl;
+  // ghTopLink và ghFootLink bị khoá chủ ý (repo launcher chưa công khai) — không gán href thật.
   document.getElementById('ghReleasesLink').href = ghUrl + '/releases';
 
   const downloadBtn = document.getElementById('downloadBtn');
@@ -255,6 +323,44 @@
     }
   }
   loadLatestRelease();
+
+  // ---- Contact form -> Formspree ----
+  // 1. Tạo tài khoản free tại https://formspree.io (đăng ký bằng email admin).
+  // 2. Tạo 1 "New Form", copy đoạn "xxxxxxxx" trong link dạng https://formspree.io/f/xxxxxxxx
+  // 3. Dán đoạn đó thay cho YOUR_FORM_ID bên dưới.
+  const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+  const contactForm = document.getElementById('contactForm');
+  const cfStatus = document.getElementById('cfStatus');
+  const cfSubmit = document.getElementById('cfSubmit');
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+      cfStatus.textContent = 'Contact form chưa được kết nối — admin cần điền FORMSPREE_ID trong index.html.';
+      cfStatus.className = 'form-status err';
+      return;
+    }
+    cfSubmit.disabled = true;
+    cfStatus.textContent = 'Đang gửi…';
+    cfStatus.className = 'form-status';
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm),
+      });
+      if (!res.ok) throw new Error('Send failed');
+      cfStatus.textContent = 'Đã gửi! Admin sẽ trả lời qua email bạn để lại.';
+      cfStatus.className = 'form-status ok';
+      contactForm.reset();
+    } catch (err) {
+      cfStatus.textContent = 'Gửi thất bại, thử lại sau hoặc liên hệ qua GitHub.';
+      cfStatus.className = 'form-status err';
+    } finally {
+      cfSubmit.disabled = false;
+    }
+  });
 </script>
 </body>
 </html>
