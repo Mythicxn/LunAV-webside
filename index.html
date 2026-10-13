@@ -118,6 +118,7 @@
   .policy-section p,.policy-section ul{margin:0; color:var(--ink-3); font-size:13px; line-height:1.7;}
   .policy-section p + p,.policy-section p + ul{margin-top:12px;}
   .policy-section ul{padding-left:20px;}
+  .policy-section li + li{margin-top:8px;}
   .policy-section a{color:var(--green); text-decoration:none;}
   .policy-section a:hover{text-decoration:underline;}
 
@@ -312,8 +313,17 @@
     <section class="policy-section" id="privacy">
       <h2>PRIVACY</h2>
       <p>The website uses GitHub's public API to check for the latest launcher release and downloads the launcher from GitHub when you choose to download it. It loads the Inter font from Google Fonts. If you submit the contact form, the name, email address, and message you provide are sent to Formspree for delivery to the site administrator.</p>
-      <p>The launcher checks GitHub for LunAV releases and may download the app from GitHub. It stores downloaded app files and version information on your device. LunAV may connect to external AI, voice, Discord, or other services depending on the features you use and how you configure the app. Those services may process data under their own privacy policies; review them before use. This notice does not claim that the app or those third-party services operate entirely offline or never transmit data.</p>
-      <p>For details about a third-party service, review its privacy policy and the current <a href="https://github.com/Mythicxn/LunAV" target="_blank" rel="noopener">LunAV app source and release information</a>.</p>
+      <p>The launcher checks GitHub for LunAV releases and may download the app from GitHub. Downloaded app files and version information are stored on your device. LunAV also stores chat history, memories, settings, and credentials locally on your device; credentials use Electron safeStorage when supported by the operating system. You can manage or delete supported history and memory data in the app, including with Forget Everything. In portable builds, some configuration files may be stored next to the app.</p>
+      <p>Depending on which features you enable and use, LunAV may send information to these third-party services:</p>
+      <ul>
+        <li><strong>Google Gemini:</strong> chat messages and relevant conversation context are sent to Gemini to generate replies. If you ask LunAV to inspect your screen, or enable Curious Observer and grant its permission, a screen image is sent to Gemini when a visual observation actually runs. Curious Observer is off by default.</li>
+        <li><strong>Tavily:</strong> when web search is configured and used, your search query is sent to Tavily to retrieve results.</li>
+        <li><strong>Text-to-speech:</strong> Sherpa-ONNX is the default local voice engine. If you choose Edge TTS, or the app falls back to it when the local engine fails, text for speech is sent to the online TTS service.</li>
+        <li><strong>Wake Word and voice:</strong> wake-word detection runs locally when enabled. If it activates a conversation, that conversation still uses Gemini. Voice samples saved for wake-word training are stored locally.</li>
+        <li><strong>Discord:</strong> when configured and you ask LunAV to join a voice channel, the bot connects to Discord to provide the enabled voice, chat, or music features. Discord processes activity under its own terms and privacy policy.</li>
+      </ul>
+      <p>Optional tools and permissions can be disabled in the app. Avoid enabling screen observation while private information is visible. Third-party services process information under their own policies; review them before use. This summary describes the website, launcher, and documented LunAV features, and does not claim that the app or its third-party services operate entirely offline or never transmit data.</p>
+      <p>For more details, review the relevant service privacy policies and the current <a href="https://github.com/Mythicxn/LunAV" target="_blank" rel="noopener">LunAV app source and release information</a>.</p>
     </section>
   </div>
 </section>
