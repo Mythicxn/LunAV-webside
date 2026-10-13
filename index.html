@@ -307,8 +307,15 @@
   <div class="wrap">
     <section class="policy-section" id="code-signing-policy">
       <h2>CODE SIGNING POLICY</h2>
-      <p>LunAV is currently in beta. The launcher and app are not currently signed with an Authenticode certificate, so Windows may display a security warning. Only continue if you trust the source; you can cancel the download or stop setup at any time.</p>
-      <p>No SignPath Foundation code-signing service or approval is currently claimed for this project. Any future signing arrangement will be described here only after it has been accepted and configured. Signing the launcher would not automatically sign the separately released LunAV app.</p>
+      <p>LunAV Launcher is currently unsigned. We have not yet been accepted into the SignPath Foundation code-signing program, and no SignPath code signing is currently provided.</p>
+      <p>Project team and responsibilities:</p>
+      <ul>
+        <li><strong>Author/Committer:</strong> Mythicxn, the project's sole maintainer, who manages the source code and build configuration.</li>
+        <li><strong>Reviewer:</strong> Mythicxn reviews contributions from non-committers before merging them.</li>
+        <li><strong>Approver:</strong> Mythicxn manually reviews and approves each release-signing request.</li>
+      </ul>
+      <p>Mythicxn currently holds all three responsibilities. This role arrangement is subject to confirmation by SignPath Foundation.</p>
+      <p>The launcher checks GitHub, downloads, and starts <code>LunAV.exe</code> from the separate <a href="https://github.com/Mythicxn/LunAV" target="_blank" rel="noopener">Mythicxn/LunAV</a> repository. LunAV is released separately, and a launcher signature would not sign the LunAV app.</p>
     </section>
     <section class="policy-section" id="privacy">
       <h2>PRIVACY</h2>
@@ -316,8 +323,8 @@
       <p>The launcher checks GitHub for LunAV releases and may download the app from GitHub. Downloaded app files and version information are stored on your device. LunAV also stores chat history, memories, settings, and credentials locally on your device; credentials use Electron safeStorage when supported by the operating system. You can manage or delete supported history and memory data in the app, including with Forget Everything. In portable builds, some configuration files may be stored next to the app.</p>
       <p>Depending on which features you enable and use, LunAV may send information to these third-party services:</p>
       <ul>
-        <li><strong>Google Gemini:</strong> chat messages and relevant conversation context are sent to Gemini to generate replies. If you ask LunAV to inspect your screen, or enable Curious Observer and grant its permission, a screen image is sent to Gemini when a visual observation actually runs. Curious Observer is off by default.</li>
-        <li><strong>Tavily:</strong> when web search is configured and used, your search query is sent to Tavily to retrieve results.</li>
+        <li><strong>Google Gemini:</strong> chat messages and relevant conversation context are sent to Gemini to generate replies. When you use Desktop Voice or Discord voice chat, the audio clips you speak are also sent to Gemini for processing. If you ask LunAV to inspect your screen, or enable Curious Observer and grant its permission, a screen image is sent to Gemini when a visual observation actually runs. Curious Observer is off by default.</li>
+        <li><strong>Web search:</strong> when web search is enabled and used, your search query is sent to DuckDuckGo first. If DuckDuckGo fails or returns no results and a Tavily API key is configured, LunAV may send the query to Tavily as a fallback. Gemini receives the resulting search information to help answer your question.</li>
         <li><strong>Text-to-speech:</strong> Sherpa-ONNX is the default local voice engine. If you choose Edge TTS, or the app falls back to it when the local engine fails, text for speech is sent to the online TTS service.</li>
         <li><strong>Wake Word and voice:</strong> wake-word detection runs locally when enabled. If it activates a conversation, that conversation still uses Gemini. Voice samples saved for wake-word training are stored locally.</li>
         <li><strong>Discord:</strong> when configured and you ask LunAV to join a voice channel, the bot connects to Discord to provide the enabled voice, chat, or music features. Discord processes activity under its own terms and privacy policy.</li>
