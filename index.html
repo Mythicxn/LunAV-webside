@@ -70,6 +70,9 @@
   }
   .btn-gh:hover{border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.03);}
   .fine{font-size:12px; color:var(--ink-3);}
+  .policy-links{display:flex; align-items:center; gap:9px; margin:0 0 14px; font-size:12px; color:var(--ink-3);}
+  .policy-links a{color:var(--ink-2); text-decoration:none;}
+  .policy-links a:hover{color:var(--green); text-decoration:underline;}
 
   .card{
     position:relative; z-index:2; border-radius:24px; border:1px solid var(--border);
@@ -107,6 +110,16 @@
   .step p{margin:0; font-size:12.5px; line-height:1.55; color:var(--ink-3);}
   .setup-notice{margin:18px 0 0; padding:14px 16px; border:1px solid rgba(255,190,90,.25); border-radius:12px; background:rgba(255,190,90,.06); color:var(--ink-2); font-size:12.5px; line-height:1.6;}
   .setup-notice strong{color:#ffcf82;}
+
+  .policies{padding:0 0 72px;}
+  .policy-section{padding:24px; border:1px solid var(--border); border-radius:18px; background:var(--panel); scroll-margin-top:88px;}
+  .policy-section + .policy-section{margin-top:14px;}
+  .policy-section h2{margin:0 0 14px; font-size:13px; letter-spacing:2px; color:var(--ink-2); font-weight:800;}
+  .policy-section p,.policy-section ul{margin:0; color:var(--ink-3); font-size:13px; line-height:1.7;}
+  .policy-section p + p,.policy-section p + ul{margin-top:12px;}
+  .policy-section ul{padding-left:20px;}
+  .policy-section a{color:var(--green); text-decoration:none;}
+  .policy-section a:hover{text-decoration:underline;}
 
   /* ---------- contact ---------- */
   .contact{padding:0 0 100px;}
@@ -191,6 +204,11 @@
         </a>
         <a class="btn-gh" id="ghReleasesLink" href="#" target="_blank" rel="noopener">See all releases ↗</a>
       </div>
+      <p class="policy-links">
+        <a href="#code-signing-policy">Code signing policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="#privacy">Privacy</a>
+      </p>
       <div class="fine">Windows · Works offline once installed · Auto-updates via GitHub</div>
     </div>
 
@@ -281,6 +299,22 @@
         <div class="form-status" id="cfStatus"></div>
       </form>
     </div>
+  </div>
+</section>
+
+<section class="policies" aria-label="Policies">
+  <div class="wrap">
+    <section class="policy-section" id="code-signing-policy">
+      <h2>CODE SIGNING POLICY</h2>
+      <p>LunAV is currently in beta. The launcher and app are not currently signed with an Authenticode certificate, so Windows may display a security warning. Only continue if you trust the source; you can cancel the download or stop setup at any time.</p>
+      <p>No SignPath Foundation code-signing service or approval is currently claimed for this project. Any future signing arrangement will be described here only after it has been accepted and configured. Signing the launcher would not automatically sign the separately released LunAV app.</p>
+    </section>
+    <section class="policy-section" id="privacy">
+      <h2>PRIVACY</h2>
+      <p>The website uses GitHub's public API to check for the latest launcher release and downloads the launcher from GitHub when you choose to download it. It loads the Inter font from Google Fonts. If you submit the contact form, the name, email address, and message you provide are sent to Formspree for delivery to the site administrator.</p>
+      <p>The launcher checks GitHub for LunAV releases and may download the app from GitHub. It stores downloaded app files and version information on your device. LunAV may connect to external AI, voice, Discord, or other services depending on the features you use and how you configure the app. Those services may process data under their own privacy policies; review them before use. This notice does not claim that the app or those third-party services operate entirely offline or never transmit data.</p>
+      <p>For details about a third-party service, review its privacy policy and the current <a href="https://github.com/Mythicxn/LunAV" target="_blank" rel="noopener">LunAV app source and release information</a>.</p>
+    </section>
   </div>
 </section>
 
